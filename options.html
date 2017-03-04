@@ -3,15 +3,41 @@
 
 <head>
     <title>Options</title>
-    <style>
-
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        
+        #name {
+            background: #fd0;
+            width: 100%;
+            text-align: center;
+            /*position: fixed;*/
+        }
+        
+        #imageProfil {
+            width: 60px;
+            height: 60px;
+        }
     </style>
 </head>
 
 <body>
-    <input type="submit" value="Deconneciton" id="deconnect">
-    <div id="name">
-    </div>
+    <img src="profil.jpg" id="imageProfil" />
+    <div id="name"> </div>
+    <input type="submit" value="   Deconneciton   " id="deconnect">
+    <p>
+        <input type="submit" value="L" id="left"> playlist
+        <input type="submit" value="R" id="right">
+    </p>
+    <p>
+        <input type="submit" value="L" id="left"> Music
+        <input type="submit" value="R" id="right">
+    </p>
+    <!-- <div id="video-placeholder"></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+-->
     <!--
     <h1>Options de l'extension</h1>
     <label for="nom">Nom</label><input type="text" name="nom" id="nom" />
