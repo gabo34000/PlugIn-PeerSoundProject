@@ -7,7 +7,11 @@
 if (localStorage['decompte']) //si le compte à rebours existe
     document.write('Il te reste ' + localStorage['decompte'] + ' secondes'); //on affiche à l'emplacement exacte du script
 window.addEventListener('load', checkUserLogged);
-var registered = document.getElementById("take a photo");
+
+/*var registered = document.getElementById("take a photo");
+if (registered)
+    registered.addEventListener("click", saluer);*/
+var registered = document.getElementById("register");
 if (registered)
     registered.addEventListener("click", saluer);
 
