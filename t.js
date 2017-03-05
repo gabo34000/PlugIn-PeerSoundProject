@@ -1,4 +1,4 @@
-alert("mabite background");
+alert("background");
 /*function newTab(fenetre,tab)
 		{
 		if (!fenetre) // premier appel : aucun paramètre existant

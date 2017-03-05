@@ -1,4 +1,4 @@
-//window.addEventListener('click', saluer);
+//window.addEventListener('click', newTab);
 //document.getElementsByTagName('body')[0].style.backgroundColor = localStorage['couleur'];
 
 //saluer();
