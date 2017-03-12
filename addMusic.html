@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        body {
+            margin: 0;
+            height: 400px;
+            width: 400px;
+        }
+        
+        #formu {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="name"> </div>
+    <div id="conteneur"> </div>
+    <form id="formu">
+        Musique :<br>
+        <input type="text" name="firstname">
+        <br> Artiste :<br>
+        <input type="text" name="artiste">
+        <br> Année :<br>
+        <input type="text" name="année">
+        <br> Genre :<br>
+        <input type="text" name="genre">
+        <br> Commentaire :<br>
+        <input type="text" name="commentaire">
+        <br> Playlist :<br>
+        <input type="text" name="playlist">
+    </form>
+    <input type="button" value="AJOUTER" id="ajout" />
+    <script src="addMusic.js"></script>
+</body>
+
+</html>

@@ -1,3 +1,43 @@
+var ongl = document.getElementById("btn");
+if (ongl)
+    ongl.addEventListener("click", newTab);
+
+function newTab(fenetre, tab) { //check sur quelle page nous sommes si c'est youtube la dupliquer sinon alert l'url de la page
+    if (!fenetre) // premier appel : aucun paramètre existant
+    {
+        chrome.windows.getLastFocused(function(fenetre) { newTab(fenetre); }); //on demande la fenêtre visible
+    } else {
+        if (!tab) // deuxième appel : 1 paramètre existant (fenetre)
+        {
+            chrome.tabs.getSelected(fenetre.id, function(tab) { newTab(fenetre, tab); }); //on demande la fenêtre visible, et on appelle la fonction une deuxième fois
+        } else // troisième appel : 2 paramètres existants (fenetre et tab)
+        {
+            url = tab.url;
+            if (url.indexOf("youtube") != -1) {
+                //chrome.tabs.create({ url: tab.url });
+                takePhoto(tab, null);
+            } else
+                alert(tab.url);
+        }
+    }
+}
+
+function takePhoto(tab, adresse) { // l'adresse est l'url de la tab a screenshot 
+    if (!adresse) {
+        chrome.tabs.captureVisibleTab(tab.windowId, null, function(adresse) { takePhoto(tab, adresse); });
+    } else {
+        localStorage['musique'] = tab.url;
+        //  var img = "";
+        //    img = '<img src="' + adresse + '" alt="riendutout"/>';
+        //alert(img);
+        document.location.href = "addMusic.html";
+        //        document.getElementById("conteneur").innerHTML = tab.url; //'<img href="' + adresse + '" alt="riendutout"/>';
+    }
+}
+
+
+
+
 //window.addEventListener('click', enregistrer);
 function createCookie(name, value, days) {
     var date = new Date();

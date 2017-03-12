@@ -6,34 +6,99 @@
     <style type="text/css">
         body {
             margin: 0;
+            height: 400px;
+            width: 400px;
         }
         
         #name {
             background: #fd0;
+            display: flex;
+            justify-content: center;
             width: 100%;
-            text-align: center;
+            /*text-align: center;
+            float: left;*/
             /*position: fixed;*/
         }
         
         #imageProfil {
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
+        }
+        
+        #profil {
+            display: flex;
+            justify-content: space-between;
+            background: green;
+            background-color: hotpink;
+            height: 119px;
+            width: 400px;
+        }
+        
+        .add {
+            /*float: right;*/
+            background-color: blue;
+            height: 100px;
+            width: 100px;
+        }
+        
+        .aParent {
+            /*display: flex;
+            justify-content: flex-start;*/
+            /*float: left;*/
+            clear: none;
+            background: green;
+        }
+        
+        .test {
+            display: flex;
+            justify-content: flex-end;
+            background: green;
+            /*float: right;*/
+            clear: none;
+        }
+        
+        #btn {
+            width: 100px;
+        }
+        
+        .testy {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* background: green;*/
+            /*float: right;*/
+            clear: none;
         }
     </style>
 </head>
 
 <body>
-    <img src="profil.jpg" id="imageProfil" />
-    <div id="name"> </div>
-    <input type="submit" value="   Deconneciton   " id="deconnect">
-    <p>
-        <input type="submit" value="L" id="left"> playlist
-        <input type="submit" value="R" id="right">
-    </p>
-    <p>
-        <input type="submit" value="L" id="left"> Music
-        <input type="submit" value="R" id="right">
-    </p>
+    <div id="profil">
+        <div class="aParent">
+            <img src="profil.jpg" id="imageProfil" />
+        </div>
+        <div id="name">
+        </div>
+        <div class="test">
+            <input type="submit" value="DECO" id="deconnect">
+            <input type="button" value="ADD" id="btn" />
+        </div>
+    </div>
+    <!--<div>
+        <input type="button" value="ADD" id="btn" />
+        <input type="submit" value="   Deconneciton   " id="deconnect">
+    </div>-->
+    <div class="testy">
+        <p>
+            <input type="submit" value="L" id="left"> playlist
+            <input type="submit" value="R" id="right">
+        </p>
+        <p>
+            <input type="submit" value="L" id="left"> Music
+            <input type="submit" value="R" id="right">
+        </p>
+    </div>
     <!-- <div id="video-placeholder"></div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -52,6 +117,7 @@
     <input type="button" value="enregistrer" id="register" />
 -->
     <script src="options.js"></script>
+    <!--<script src="addMusic.js"></script>-->
 </body>
 
 </html>

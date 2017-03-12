@@ -1,3 +1,4 @@
+
 alert("background");
 /*function newTab(fenetre,tab)
 		{
