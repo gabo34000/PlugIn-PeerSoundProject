@@ -1,5 +1,11 @@
+var unique = require('uniq');
 
-alert("background");
+var data = [1, 2, 2, 3, 4, 5, 5, 5, 6];
+
+console.log(unique(data));
+var foo = require('./foo.js');
+console.log(foo(4));
+//console.log("background");
 /*function newTab(fenetre,tab)
 		{
 		if (!fenetre) // premier appel : aucun paramètre existant
@@ -29,7 +35,7 @@ chrome.tabs.getSelected(null, function(onglet) { faireJoujou(onglet); });
 
 //chrome.windows.create({ url: "http://www.siteduzero.com" }) // charger une window
 
-
+/*
 
 localStorage['decompte'] = 15 * 60; //15*60 secondes <=> 15 minutes
 function decompter() //appellée toute les 2 secondes
@@ -40,4 +46,4 @@ function decompter() //appellée toute les 2 secondes
         clearInterval(repetition); //on arrète le compte à rebours
     }
 }
-var repetition = setInterval(decompter, 2000); //toutes les 2 secondes -> ne pas surcharger le navigateur
+var repetition = setInterval(decompter, 2000); //toutes les 2 secondes -> ne pas surcharger le navigateur*/
