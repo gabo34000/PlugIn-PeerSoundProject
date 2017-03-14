@@ -3,6 +3,10 @@
 
 <head>
     <title>Options</title>
+    <link rel="stylesheet" href="./mdl/material.min.css">
+    <script src="./mdl/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
     <style type="text/css">
         body {
             margin: 0;
@@ -52,12 +56,18 @@
         .test {
             display: flex;
             justify-content: flex-end;
+            align-items: stretch;
+            flex-direction: column-reverse;
             background: green;
             /*float: right;*/
             clear: none;
         }
         
         #btn {
+            width: 100px;
+        }
+        
+        #deconnect {
             width: 100px;
         }
         
@@ -81,8 +91,10 @@
         <div id="name">
         </div>
         <div class="test">
-            <input type="submit" value="DECO" id="deconnect">
-            <input type="button" value="ADD" id="btn" />
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deconnect">DECO</button>
+            <!--<input type="button" value="DECO" id="deconnect">-->
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btn">ADD</button>
+            <!--            <input type="button" value="ADD" id="btn" /> -->
         </div>
     </div>
     <!--<div>

@@ -3,8 +3,21 @@ var unique = require('uniq');
 var data = [1, 2, 2, 3, 4, 5, 5, 5, 6];
 
 console.log(unique(data));
-var foo = require('./foo.js');
-console.log(foo(4));
+
+var browserify = require('browserify');
+var http = require('http');
+
+/*http.createServer(function(req, res) {
+    if (req.url === '/bundle.js') {
+        res.setHeader('content-type', 'application/javascript');
+        var b = browserify(__dirname + '/main.js').bundle();
+        b.on('error', console.error);
+        b.pipe(res);
+    } else res.writeHead(404, 'not found')
+});
+*/
+//var foo = require('./foo.js');
+//console.log(foo(4));
 //console.log("background");
 /*function newTab(fenetre,tab)
 		{

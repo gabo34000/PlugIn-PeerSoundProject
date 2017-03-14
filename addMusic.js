@@ -6,7 +6,7 @@ var idMusicV1 = localStorage['musique'].slice("https://www.youtube.com/watch?v="
 var index = idMusicV1.indexOf("&index");
 var list = idMusicV1.indexOf("&list");
 var idMusicV2 = "";
-alert("index" + index + "list" + list);
+//alert("index" + index + "list" + list);
 if (index >= list) {
     if (list != -1) {
         idMusicV2 = idMusicV1.slice(0, list);
@@ -28,7 +28,7 @@ if (index >= list) {
 } else {
     idMusicV2 = idMusicV1;
 }
-alert("ID MUSIC " + idMusicV2);
+
 var include = function(url, callback) {
     /* on crée une balise<script type="text/javascript"></script> */
     var script = document.createElement('script');
@@ -46,16 +46,29 @@ var include = function(url, callback) {
     document.getElementsByTagName('head')[0].appendChild(script);
 }
 
-//include("https://code.jquery.com/jquery-1.11.3.js");
-/*var script = document.createElement('script');
-script.src = 'http://code.jquery.com/jquery-1.11.3.min.js';
-script.type = 'text/javascript';*/
-//document.getElementsByTagName('head')[0].appendChild(script);
-//var id = 'rVqAdIMQZlk';
+var artist = "";
+var title = "";
 var url = 'https://www.youtube.com/watch?v=' + idMusicV2;
 $.getJSON('https://noembed.com/embed', { format: 'json', url: url }, function(data) {
-    alert(data.title);
+    console.log(data.title);
+    var test = data.title.indexOf(" - ");
+    if (test != -1) {
+        artist = data.title.slice(0, test);
+        title = data.title.slice(test + 3, data.title.length);
+    } else {
+        title = data.title;
+    }
+    addInfMusic();
 });
+
+function addInfMusic() {
+    console.log("artist :" + artist + " title :" + title);
+    var name = document.getElementById("firstname");
+    name.value = title;
+    var artiste = document.getElementById("artiste");
+    if (artist != "")
+        artiste.value = artist;
+}
 
 /*var ongl = document.getElementById("btn");
 if (ongl)
