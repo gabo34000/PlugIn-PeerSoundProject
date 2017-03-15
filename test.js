@@ -1,16 +1,7 @@
-//window.addEventListener('click', newTab);
-//document.getElementsByTagName('body')[0].style.backgroundColor = localStorage['couleur'];
-
-//saluer();
-/*if (localStorage['decompte']) //si le compte à rebours existe
-    document.write('Il te reste ' + localStorage['decompte'] + ' secondes');*/ //on affiche à l'emplacement exacte du script
 if (localStorage['decompte']) //si le compte à rebours existe
     document.write('Il te reste ' + localStorage['decompte'] + ' secondes'); //on affiche à l'emplacement exacte du script
 window.addEventListener('load', checkUserLogged);
 
-/*var registered = document.getElementById("take a photo");
-if (registered)
-    registered.addEventListener("click", saluer);*/
 var registered = document.getElementById("register");
 if (registered)
     registered.addEventListener("click", saluer);
@@ -19,27 +10,23 @@ var ongl = document.getElementById("btn");
 if (ongl)
     ongl.addEventListener("click", newTab);
 
-function newTab(fenetre, tab) { //check sur quelle page nous sommes si c'est youtube la dupliquer sinon alert l'url de la page
-    if (!fenetre) // premier appel : aucun paramètre existant
-    {
-        chrome.windows.getLastFocused(function(fenetre) { newTab(fenetre); }); //on demande la fenêtre visible
+function MakePic(fenetre, tab) {
+    if (!fenetre) {
+        chrome.windows.getLastFocused(function(fenetre) { newTab(fenetre); });
     } else {
-        if (!tab) // deuxième appel : 1 paramètre existant (fenetre)
-        {
-            chrome.tabs.getSelected(fenetre.id, function(tab) { newTab(fenetre, tab); }); //on demande la fenêtre visible, et on appelle la fonction une deuxième fois
-        } else // troisième appel : 2 paramètres existants (fenetre et tab)
-        {
+        if (!tab) {
+            chrome.tabs.getSelected(fenetre.id, function(tab) { newTab(fenetre, tab); });
+        } else {
             url = tab.url;
             if (url.indexOf("youtube") != -1) {
-                //chrome.tabs.create({ url: tab.url });
-                takePhoto(tab, null /*tab, tab.url*/ );
+                takePhoto(tab, null);
             } else
                 alert(tab.url);
         }
     }
 }
 
-function takePhoto(tab, adresse) { // l'adresse est l'url de la tab a screenshot 
+function takePhoto(tab, adresse) {
     if (!adresse) {
         chrome.tabs.captureVisibleTab(tab.windowId, null, function(adresse) { takePhoto(tab, adresse); });
     } else {
@@ -71,9 +58,9 @@ function checkUserLogged() {
 }
 var user;
 
-function saluer() //gestion de la boite de dialogue 
-{
-    var name = document.getElementById('nom');
+function saluer() {
+    console.log("ça passe dans saluer");
+    var name = document.getElementById('username');
     var mdp = document.getElementById('password');
     console.log(name.value);
     if (name.value != "" && mdp.value != "") {
@@ -85,37 +72,26 @@ function saluer() //gestion de la boite de dialogue
     } else
         console.log("pas de nom ou mdp");
 }
-//document.getElementById("register").addEventListener("click", register);
 
 function createCookie(name, value, days) {
     var date = new Date();
-    //récupérer la date d'aujourd'ui
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    //récupérer la date d'expiration en millisecondes
     var expires = ";expires=" + date.toGMTString();
-    //date a maintenant pour valeur la date en millisecondes à laquelle le cookie doit expirer 
     document.cookie = name + "=" + value + expires + "; path=/";
-    //envoi le cookie a firefox
     console.log("document cookie :" + document.cookie);
-    //affiche le cookie envoyé
 }
 
 function readCookie(name) {
     var nameCookie = name + "=";
-    //recherche le nom du cookie
     var TabCookie = document.cookie.split(';');
-    //va récupéprer tout les cookie séparé par un ';'
+
     for (var i = 0; i < TabCookie.length; i++) {
-        //parcoure le tableau des différents cookie
         var cookie = TabCookie[i];
         while (cookie.charAt(0) == ' ') {
             cookie = cookie.substring(1, cookie.length);
-            //suprime les espaces
         }
         if (cookie.indexOf(nameCookie) == 0)
-        //si il trouve un cookie correspondant au nom
             return cookie.substring(nameCookie.length, cookie.length);
-        // le retourne
     }
     return null;
 }

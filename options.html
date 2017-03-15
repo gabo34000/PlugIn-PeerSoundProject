@@ -7,6 +7,7 @@
     <script src="./mdl/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+    <link rel="stylesheet" href="./css3buttons-master/stylesheets/css3buttons.css" />
     <style type="text/css">
         body {
             margin: 0;
@@ -15,13 +16,10 @@
         }
         
         #name {
-            background: #fd0;
+            background: #ededed;
             display: flex;
             justify-content: center;
             width: 100%;
-            /*text-align: center;
-            float: left;*/
-            /*position: fixed;*/
         }
         
         #imageProfil {
@@ -32,53 +30,57 @@
         #profil {
             display: flex;
             justify-content: space-between;
-            background: green;
-            background-color: hotpink;
-            height: 119px;
+            background: #ededed;
+            background-color: #ededed;
+            height: 150px;
             width: 400px;
         }
         
         .add {
-            /*float: right;*/
             background-color: blue;
             height: 100px;
             width: 100px;
         }
         
         .aParent {
-            /*display: flex;
-            justify-content: flex-start;*/
-            /*float: left;*/
-            clear: none;
-            background: green;
-        }
-        
-        .test {
             display: flex;
-            justify-content: flex-end;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: stretch;
-            flex-direction: column-reverse;
-            background: green;
-            /*float: right;*/
             clear: none;
+            background: #ededed;
         }
         
-        #btn {
-            width: 100px;
+        .add {
+            display: flex;
+            background: #ededed;
+            clear: none;
         }
         
         #deconnect {
             width: 100px;
         }
         
-        .testy {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            /* background: green;*/
-            /*float: right;*/
+        .MusicList {
             clear: none;
+        }
+        
+        #playList {
+            width: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        #music {
+            width: 100%;
+            background: #ededed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -87,49 +89,29 @@
     <div id="profil">
         <div class="aParent">
             <img src="profil.jpg" id="imageProfil" />
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deconnect">DECO</button>
         </div>
         <div id="name">
         </div>
-        <div class="test">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deconnect">DECO</button>
-            <!--<input type="button" value="DECO" id="deconnect">-->
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btn">ADD</button>
-            <!--            <input type="button" value="ADD" id="btn" /> -->
+        <div class="add">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="btn">
+             <i class="material-icons">add</i>
+            </button>
         </div>
     </div>
-    <!--<div>
-        <input type="button" value="ADD" id="btn" />
-        <input type="submit" value="   Deconneciton   " id="deconnect">
-    </div>-->
-    <div class="testy">
-        <p>
-            <input type="submit" value="L" id="left"> playlist
-            <input type="submit" value="R" id="right">
-        </p>
-        <p>
-            <input type="submit" value="L" id="left"> Music
-            <input type="submit" value="R" id="right">
-        </p>
+    <div class="MusicList">
+        <div id="playList">
+            <p>PLAYLIST</p>
+            <p> <input type="submit" value="L" id="left"> RAP US
+                <input type="submit" value="R" id="right"></p>
+        </div>
+        <div id="music">
+            <p>MUSIC</p>
+            <p><input type="submit" value="L" id="left"> MF DOOM feat RZA - Books of War
+                <input type="submit" value="R" id="right"></p>
+        </div>
     </div>
-    <!-- <div id="video-placeholder"></div>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
--->
-    <!--
-    <h1>Options de l'extension</h1>
-    <label for="nom">Nom</label><input type="text" name="nom" id="nom" />
-    <label for="nom">Couleur préférée</label>
-    <select name="couleur" id="couleur">
-		<option value="green">vert</option>
-		<option value="red">rouge</option>
-		<option value="blue">bleu</option>
-		<option value="white">blanc</option>
-		<option value="white">gris</option>
-		</select>
-    <input type="button" value="enregistrer" id="register" />
--->
     <script src="options.js"></script>
-    <!--<script src="addMusic.js"></script>-->
 </body>
 
 </html>

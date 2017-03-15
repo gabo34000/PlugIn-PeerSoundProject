@@ -10,102 +10,99 @@
     <style type="text/css">
         body {
             background-color: #dcdcdc;
-            /**height: 400px;**/
             width: 400px;
         }
-
+        
         .float {
-          float:left;
+            float: left;
         }
-
+        
         .center {
-          margin: 40px;
+            margin: 40px;
         }
-
+        
         .center-width {
-          margin: 40px;
-          width: 80%;
+            margin: 40px;
+            width: 80%;
         }
-
+        
         .center-top60 {
-          margin-top: -60px;
+            margin-top: -60px;
         }
-
+        
         .center-top40 {
-          margin-top: -40px;
+            margin-top: -40px;
         }
-
+        
         .center-top20 {
-          margin-top: -20px;
+            margin-top: -20px;
         }
-
+        
         .center-top10 {
-          margin-top: -10px;
+            margin-top: -10px;
         }
-
+        
         @font-face {
-            font-family: TitleFont; /*a name to be used later*/
-            src: url('fonts/TitleFont.otf'); /*URL to font*/
+            font-family: TitleFont;
+            src: url('fonts/TitleFont.otf');
         }
-
+        
         .title {
-          font-family: Titlefont;
-          font-size: 120%;
+            font-family: Titlefont;
+            font-size: 120%;
         }
-
+        
         #alignLogo {
-          display : flex;
-          justify-content: center;
-          align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
+        
         #alignButtons {
-          margin: 40px;
-          margin-top: -40px;
-          display: flex;
-          justify-content: space-between;
+            margin: 40px;
+            margin-top: -40px;
+            display: flex;
+            justify-content: space-between;
         }
-
+        
         a {
-          text-decoration: none;
-          color: inherit;
+            text-decoration: none;
+            color: inherit;
         }
-
+        
         a:hover {
-          color: rgb(33,150,243);
+            color: rgb(33, 150, 243);
         }
-
     </style>
 </head>
 
 <body>
-    <!--<button type="button" id="test">TEST</button>-->
     <div id="alignLogo">
         <a href="http://eip.epitech.eu/2019/peersoundproject/" target="_blank">
-          <img id="LogoPSP" src="img/LogoPSP_69.png"/>
-          <t class="title"> PeerSoundProject </t>
-        <a/>
+            <img id="LogoPSP" src="img/LogoPSP_69.png" />
+            <t class="title"> PeerSoundProject </t>
+            <a/>
     </div>
     <div>
-    <form class="center-width center-top10" action="#">
-      <div class="mdl-textfield mdl-js-textfield" >
-        <input class="mdl-textfield__input" type="text" id="username">
-        <label class="mdl-textfield__label" for="username">Username</label>
-      </div>
-      <div class="mdl-textfield mdl-js-textfield center-top60" >
-        <input class="mdl-textfield__input" type="text" id="password">
-        <label class="mdl-textfield__label" for="password">Password</label>
-      </div>
-    </form>
-    <div id="alignButtons">
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        <form class="center-width center-top10" action="#">
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="username">
+                <label class="mdl-textfield__label" for="username">Username</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield center-top60">
+                <input class="mdl-textfield__input" type="text" id="password">
+                <label class="mdl-textfield__label" for="password">Password</label>
+            </div>
+        </form>
+        <div id="alignButtons">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="register">
         Login
       </button>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
         Forgotten Password
       </button>
-    </div>
-
+        </div>
+        <script type="text/javascript" src="./test.js"></script>
 </body>
 
 </html>
