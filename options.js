@@ -10,14 +10,14 @@
 
 var ongl = document.getElementById("btn");
 if (ongl)
-    ongl.addEventListener("click", newTab);
+    ongl.addEventListener("click", MakePic);
 
 function MakePic(fenetre, tab) {
     if (!fenetre) {
-        chrome.windows.getLastFocused(function(fenetre) { newTab(fenetre); });
+        chrome.windows.getLastFocused(function(fenetre) { MakePic(fenetre); });
     } else {
         if (!tab) {
-            chrome.tabs.getSelected(fenetre.id, function(tab) { newTab(fenetre, tab); });
+            chrome.tabs.getSelected(fenetre.id, function(tab) { MakePic(fenetre, tab); });
         } else {
             url = tab.url;
             if (url.indexOf("youtube") != -1) {

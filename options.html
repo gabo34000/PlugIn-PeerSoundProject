@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
     <link rel="stylesheet" href="./css3buttons-master/stylesheets/css3buttons.css" />
+    <link rel="stylesheet" href="style.css">
     <style type="text/css">
         body {
             margin: 0;
@@ -32,7 +33,7 @@
             justify-content: space-between;
             background: #ededed;
             background-color: #ededed;
-            height: 150px;
+            height: 130px;
             width: 400px;
         }
         
@@ -82,13 +83,29 @@
             justify-content: center;
             flex-direction: column;
         }
+        
+        #playerAudio {
+            width: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
     </style>
 </head>
 
 <body>
     <div id="profil">
         <div class="aParent">
-            <img src="profil.jpg" id="imageProfil" />
+            <div class="Profile">
+                <div class="Img">
+                    <div class="overlay">
+                        <span><img /></span>
+                    </div>
+                </div>
+            </div>
+            <!--            <img src="profil.jpg" id="imageProfil" /> -->
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deconnect">DECO</button>
         </div>
         <div id="name">
@@ -110,8 +127,11 @@
             <p><input type="submit" value="L" id="left"> MF DOOM feat RZA - Books of War
                 <input type="submit" value="R" id="right"></p>
         </div>
+        <img src="./img/audio_player.jpg" alt="player_audio" height="34" width="301" id="playerAudio">
+
     </div>
     <script src="options.js"></script>
+    <script src="jquery.min.js"></script>
 </body>
 
 </html>
