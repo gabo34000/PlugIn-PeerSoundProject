@@ -5,17 +5,17 @@
     "manifest_version": 2,
     "permissions": ["unlimitedStorage", "background", "tabs", "<all_urls>", "http://code.jquery.com/jquery-1.11.3.min.js"], //,"./jquery-1.11.3.js"],
     "content_scripts": [{
-        "js": ["jquery-1.11.3.js"], //, "http://code.jquery.com/jquery-1.11.3.min.js"],
+        "js": ["lib/jquery-1.11.3.js"], //, "http://code.jquery.com/jquery-1.11.3.min.js"],
         "matches": ["http://*/*", "https://*/*"]
     }],
     //"scripts": ["http://code.jquery.com/jquery-1.11.3.min.js", "jquery-1.11.3.js"],
     //   "background": "background.html",
-    "options_page": "options.html",
+    "options_page": "./src/vue/profil.html",
     "browser_action": {
-        "default_popup": "dire_bonjour.html"
+        "default_popup": "index.html"
     },
     "background": {
-        "page": "background.html"
+        "page": "./src/vue/background.html"
             //"scripts": ["http://code.jquery.com/jquery-1.11.3.min.js"]
     }
     /*"background": {
