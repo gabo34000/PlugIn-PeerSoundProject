@@ -1,26 +1,27 @@
 {
     "name": "PeerSoundProject",
-    "version": "1.0",
-    "description": "Réseau social de partage de musiques",
+    "version": "0.1",
+    "description": "réseau de partage et de streaming de musique",
     "manifest_version": 2,
-    "permissions": ["unlimitedStorage", "background", "tabs", "<all_urls>", "http://code.jquery.com/jquery-1.11.3.min.js"], //,"./jquery-1.11.3.js"],
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "permissions": ["unlimitedStorage", "background", "tabs", "<all_urls>", "activeTab"],
     "content_scripts": [{
-        "js": ["lib/jquery-1.11.3.js"], //, "http://code.jquery.com/jquery-1.11.3.min.js"],
-        "matches": ["http://*/*", "https://*/*"]
+        "matches": ["http://*/*", "https://*/*", "*://*/*"],
+        "css": ["src/css/show_doggy.css"],
+        "all_frames": true
     }],
-    //"scripts": ["http://code.jquery.com/jquery-1.11.3.min.js", "jquery-1.11.3.js"],
-    //   "background": "background.html",
-    "options_page": "./src/vue/profil.html",
+    "web_accessible_resources": [
+        "index.html", "src/js/index.js", "profil.html", "takeMusic.html", "SendArticle.html", "mailOk.html", "content.js"
+    ],
     "browser_action": {
-        "default_popup": "index.html"
+        "default_icon" : "images/icon71.png"
     },
     "background": {
-        "page": "./src/vue/background.html"
-            //"scripts": ["http://code.jquery.com/jquery-1.11.3.min.js"]
+        "default_icon" : "images/icon71.png",
+         "scripts": ["background.js"]
     }
-    /*"background": {
-        "scripts": [
-            "https://www.youtube.com/iframe_api"
-        ]
-    }*/
 }
