@@ -105,7 +105,7 @@ h1 {
     transform: translate3d(0,0,0);
 }
 
-#main:not(.sendArticle) {
+#main:not(.sendMusic) {
     padding: 2.5rem 2rem;
 }
 
@@ -341,7 +341,7 @@ h1 {
     transition: transform .5s cubic-bezier(.31,.8,.18,1.01);
 }
 
-.sendArticle #errorPop {
+.sendMusic #errorPop {
     position: absolute;
     top: 0;
     left: 0;
@@ -357,7 +357,7 @@ h1 {
     transition: transform .5s cubic-bezier(.31,.8,.18,1.01);
 }
 
-.sendArticle #errorPop p {
+.sendMusic #errorPop p {
     width: 100%;
 }
 
@@ -557,7 +557,7 @@ h1 {
     background: #1D82F1 url(../../images/icon-check.svg) no-repeat 50% / 12px 9px;
 }
 
-.sendArticle .submit {
+.sendMusic .submit {
     position: absolute;
     bottom: 0;
     left: 0;

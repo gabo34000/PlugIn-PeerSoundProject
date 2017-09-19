@@ -26,13 +26,14 @@ function getLink(fenetre, tab) {
              chrome.tabs.getSelected(fenetre.id, function(tab) { getLink(fenetre, tab); });
          } else {
              var url = tab.url;
-             if (url.indexOf("youtube") > 0)
-             var urlStringified = JSON.stringify(url);
-             localStorage.setItem("musicToAdd", urlStringified);
-             main.classList.remove('show');
-             setTimeout(function(){
+             if (url.indexOf("www.youtube.com/watch?v=") > 0){
+                var urlStringified = JSON.stringify(url);
+                localStorage.setItem("musicToAdd", urlStringified);
+                main.classList.remove('show');
+                setTimeout(function(){
                  document.location.href = "takeMusic.html"
-             }, 500);
+                }, 500);
+            }
          }
      }
  }

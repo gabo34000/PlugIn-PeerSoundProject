@@ -136,16 +136,16 @@ infos = JSON.parse(infos);
     if(tab.length != 0) {
       jQuery.post('https://plugin.evolt.io/domain/', { //'http://127.0.0.1:8080/domain/',
             sender: localStorage.getItem("email"),
-            lien: infos.lien,
+            title: infos.title,
             contacts: JSON.stringify(tab),
-            why: infos.why,
-            what: infos.what
+            artist: infos.artist,
+            date : infos.date
         }, function(rslt, err) {
         });
         popError.className = '';
         main.classList.remove('show');
 	setTimeout(function(){
-        document.location.href = "mailOk.html";
+        document.location.href = "musicOk.html";
 	}, 500);
     } else {
         popError.className = 'show';
