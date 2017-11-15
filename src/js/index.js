@@ -12,10 +12,10 @@ var firstCo = document.getElementById('button1Connexion');
     main.classList.add('show');
 if (t)
     t.addEventListener("click", changePage);
-
+/*
 if (localStorage.getItem("email") && localStorage.getItem("pass")){
    document.location.href = "profil.html";
-}
+}*/
 
 var close = document.getElementById("cloclo");
   if (close)
@@ -26,23 +26,36 @@ function closer(){
 }
 
 function changePage() {
- if (localStorage.getItem("email")){
+ /*if (localStorage.getItem("email")){
     main.classList.remove('show');
     setTimeout(function(){
-      document.location.href = "profil.html";
+      //document.location.href = "profil.html";
     }, 500);
  }
- else {
+ else {*/
     var email = document.getElementById("inputEmail"),
     		pass = document.getElementById("inputPassword");
-    if ( (email.value) && (pass.value) ) {
-      email.className = '';
-      	pass.className = '';
+      if ( (email.value) && (pass.value) ) {
+        console.log(email.value + pass.value);        
+        jQuery.post('127.0.0.1:8000/api/auth/login',
+        {
+          login: email.value,
+          password: pass.value
+        },
+         function (data) {
+          console.log("bite!!!");  
+           if (data.User) {
+              alert("mabite OKKK !!!"); 
+              console.log("mabite ok !!!");
+            }
+           });
+        email.className = '';
+        pass.className = '';1
         localStorage.setItem("email", email.value + " " + pass.value);
-        localStorage.setItem("pass", pass.value);
         main.classList.remove('show');
         setTimeout(function(){
-          document.location.href = "./profil.html";
+          
+          //document.location.href = "./profil.html";
         }, 500);
 
     } else if ( !(email.value) && (pass.value) ) {
@@ -56,4 +69,4 @@ function changePage() {
     	pass.className = 'error';
     }
   }
-}
+//}

@@ -4,9 +4,9 @@
     "description": "réseau de partage et de streaming de musique",
     "manifest_version": 2,
     "icons": {
-        "16": "images/icon16.png",
-        "48": "images/icon48.png",
-        "128": "images/icon128.png"
+        "16": "images/psp.png",
+        "48": "images/psp.png",
+        "128": "images/psp.png"
     },
     "permissions": ["unlimitedStorage", "background", "tabs", "<all_urls>", "activeTab"],
     "content_scripts": [{
@@ -15,13 +15,13 @@
         "all_frames": true
     }],
     "web_accessible_resources": [
-        "index.html", "src/js/index.js", "profil.html", "takeMusic.html", "SendMusic.html", "musicOk.html", "content.js"
+        "index.html", "src/js/index.js", "profil.html", "takeMusic.html", "SendMusic.html", "content.js"
     ],
     "browser_action": {
-        "default_icon" : "images/icon71.png"
+        "default_icon" : "images/psp.png"
     },
     "background": {
-        "default_icon" : "images/icon71.png",
+        "default_icon" : "images/psp.png",
          "scripts": ["background.js"]
     }
 }

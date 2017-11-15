@@ -37,3 +37,6 @@ function getLink(fenetre, tab) {
          }
      }
  }
+
+ var popup = document.getElementById("myPopup");
+ popup.classList.toggle("show");

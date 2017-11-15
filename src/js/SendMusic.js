@@ -134,7 +134,7 @@ for (var i = 0; i < tabContacts.length; i++){
 var infos = sessionStorage.getItem("infos");
 infos = JSON.parse(infos);
     if(tab.length != 0) {
-      jQuery.post('https://plugin.evolt.io/domain/', { //'http://127.0.0.1:8080/domain/',
+      jQuery.post('http://127.0.0.1:8080/domain/', {
             sender: localStorage.getItem("email"),
             title: infos.title,
             contacts: JSON.stringify(tab),
@@ -145,7 +145,7 @@ infos = JSON.parse(infos);
         popError.className = '';
         main.classList.remove('show');
 	setTimeout(function(){
-        document.location.href = "musicOk.html";
+        document.location.href = "profil.html";
 	}, 500);
     } else {
         popError.className = 'show';
@@ -175,7 +175,7 @@ function historyPage() {
 function hidePop() {
     popError.className = '';
 }
-
+/*
 jQuery.noConflict();
 jQuery(function($) {
 
@@ -201,4 +201,4 @@ jQuery(function($) {
             e.preventDefault();
         });
     });
-});
+});*/

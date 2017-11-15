@@ -1,4 +1,4 @@
-#doggyFrame {
+#PSPFrame {
 	position:fixed;
 	top:2%;
 	right: 2%;
@@ -15,7 +15,7 @@
 	background: #252B33;
 }
 
-#doggyFrame.showdoggy {
+#PSPFrame.showPSP {
 	opacity: 1;
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);

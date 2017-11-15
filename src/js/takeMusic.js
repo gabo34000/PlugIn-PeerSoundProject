@@ -76,9 +76,10 @@ function sendMusic() {
         textarea2.className = '';
         popError.className = '';
         sessionStorage.setItem("infos", JSON.stringify(infs));
-        main.classList.remove('show');
+       // main.classList.remove('show');
+       //http://jsfiddle.net/Gajotres/6M9ES/
         setTimeout(function(){
-            document.location.href = "musicOk.html"
+            document.location.href = "profil.html"
         }, 500);
     }
     else {
