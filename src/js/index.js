@@ -12,10 +12,10 @@ var firstCo = document.getElementById('button1Connexion');
     main.classList.add('show');
 if (t)
     t.addEventListener("click", changePage);
-/*
-if (localStorage.getItem("email") && localStorage.getItem("pass")){
+
+if (localStorage.getItem("email")){
    document.location.href = "profil.html";
-}*/
+}
 
 var close = document.getElementById("cloclo");
   if (close)
@@ -26,38 +26,36 @@ function closer(){
 }
 
 function changePage() {
- /*if (localStorage.getItem("email")){
+ if (localStorage.getItem("email")){
     main.classList.remove('show');
     setTimeout(function(){
-      //document.location.href = "profil.html";
+      document.location.href = "profil.html";
     }, 500);
  }
- else {*/
+ else {
     var email = document.getElementById("inputEmail"),
     		pass = document.getElementById("inputPassword");
-      if ( (email.value) && (pass.value) ) {
-        console.log(email.value + pass.value);        
-        jQuery.post('127.0.0.1:8000/api/auth/login',
+    if ( (email.value) && (pass.value) ) {
+      email.className = '';
+      	pass.className = '';
+        jQuery.post('https://localhost:8000/api/auth/login',
         {
           login: email.value,
           password: pass.value
         },
          function (data) {
-          console.log("bite!!!");  
-           if (data.User) {
-              alert("mabite OKKK !!!"); 
-              console.log("mabite ok !!!");
+          console.log(email.value + pass.value + ']');  
+           if (data.code != -1) {
+              console.log(data);
+              localStorage.setItem("email", email.value);
+              console.log(data.account.usr_id);
+              localStorage.setItem("id", data.account.usr_id);
+              main.classList.remove('show');
+              setTimeout(function(){
+              document.location.href = "./profil.html";
+              }, 500);
             }
-           });
-        email.className = '';
-        pass.className = '';1
-        localStorage.setItem("email", email.value + " " + pass.value);
-        main.classList.remove('show');
-        setTimeout(function(){
-          
-          //document.location.href = "./profil.html";
-        }, 500);
-
+          });
     } else if ( !(email.value) && (pass.value) ) {
     	email.className = 'error';
     	pass.className = '';
@@ -69,4 +67,7 @@ function changePage() {
     	pass.className = 'error';
     }
   }
-//}
+}
+
+var musicAdded = 0;
+localStorage.setItem('musicAdded', musicAdded);

@@ -34,9 +34,33 @@ function getLink(fenetre, tab) {
                  document.location.href = "takeMusic.html"
                 }, 500);
             }
-         }
-     }
- }
+        }
+    }
+}
 
- var popup = document.getElementById("myPopup");
- popup.classList.toggle("show");
+var musicAdded = localStorage.getItem('musicAdded');
+musicAdded = JSON.parse(musicAdded);
+if (musicAdded == 1){
+    $(function(){
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+        function show_popup(){
+            $(".popup").slideUp();
+        };
+        window.setTimeout( show_popup, 2000 );
+     });
+     popup.classList.toggle("hidden");
+     musicAdded = 0;
+     localStorage.setItem('musicAdded', musicAdded);     
+}
+/*
+jQuery.get('https://localhost:8000/api/user/',
+{
+    usr_id : JSON.parse(localStorage.getItem("id"))
+},
+function (data){
+    if (data){
+        console.log(data);
+    }
+}
+);*/

@@ -613,9 +613,9 @@ h1 {
 
 .popup {
     position: relative;
-    margin-right: 35%;
+    margin-left: 120px;
+    margin-top: 2px;
     display: inline-block;
-    cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -644,12 +644,7 @@ h1 {
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
 }
-
 /* Toggle this class - hide and show the popup */
 .popup .show {
     visibility: visible;
@@ -666,4 +661,12 @@ h1 {
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:1 ;}
+}
+
+#profil {
+    position: relative;
+    margin-left: 10px;    
+}
+.photoProfil {
+    border-radius: 50%;
 }
