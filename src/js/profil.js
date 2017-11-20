@@ -53,14 +53,11 @@ if (musicAdded == 1){
      musicAdded = 0;
      localStorage.setItem('musicAdded', musicAdded);     
 }
-/*
-jQuery.get('https://localhost:8000/api/user/',
-{
-    usr_id : JSON.parse(localStorage.getItem("id"))
-},
+
+jQuery.get('https://localhost:8000/api/user/' + JSON.parse(localStorage.getItem("id")),
 function (data){
     if (data){
         console.log(data);
     }
 }
-);*/
+);

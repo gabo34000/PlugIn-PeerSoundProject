@@ -37,7 +37,8 @@ function changePage() {
     		pass = document.getElementById("inputPassword");
     if ( (email.value) && (pass.value) ) {
       email.className = '';
-      	pass.className = '';
+        pass.className = '';
+        console.log(email.value + pass.value + ']'); 
         jQuery.post('https://localhost:8000/api/auth/login',
         {
           login: email.value,
@@ -45,11 +46,13 @@ function changePage() {
         },
          function (data) {
           console.log(email.value + pass.value + ']');  
-           if (data.code != -1) {
+           if (data.error != - 1) {
               console.log(data);
               localStorage.setItem("email", email.value);
               console.log(data.account.usr_id);
               localStorage.setItem("id", data.account.usr_id);
+              console.log(data.account.usr_firstame);
+              localStorage.setItem("name", data.account.usr_firstame);
               main.classList.remove('show');
               setTimeout(function(){
               document.location.href = "./profil.html";

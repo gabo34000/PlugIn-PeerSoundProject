@@ -78,6 +78,22 @@ function sendMusic() {
         sessionStorage.setItem("infos", JSON.stringify(infs));
        var musicAdded = 1;
        localStorage.setItem('musicAdded', musicAdded);
+       console.log(JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url);
+       jQuery.post('https://localhost:8000/api/music/',{
+            usr_id: JSON.parse(localStorage.getItem("id")),
+            music_source: "youtube",
+            music_group: artist.value,
+            music_name: boxUrl.value,
+            music_description: description.value,
+            music_url: url,
+            music_date: date.value
+       },
+       function (data){
+           if (data){
+               console.log(data);
+           }
+       }
+       );
         setTimeout(function(){
             document.location.href = "profil.html"
         }, 500);

@@ -670,3 +670,8 @@ h1 {
 .photoProfil {
     border-radius: 50%;
 }
+
+#name {
+    position: relative;
+    margin-left: 40%;
+}
