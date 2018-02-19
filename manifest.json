@@ -8,20 +8,24 @@
         "48": "images/psp.png",
         "128": "images/psp.png"
     },
-    "permissions": ["unlimitedStorage", "background", "tabs", "<all_urls>", "activeTab"],
+    
+    "permissions": ["unlimitedStorage", "tabs", "<all_urls>", "activeTab", "cookies", "webRequest", "webNavigation", "*://developer.mozilla.org/*", "browsingData", "privacy"],
     "content_scripts": [{
-        "matches": ["http://*/*", "https://*/*", "*://*/*"],
+        "matches": ["http://*/*", "https://*/*", "*://*/*", "*://*.mozilla.org/*"],
         "css": ["src/css/show_doggy.css"],
-        "all_frames": true
+        "all_frames": true,
+        "js" : ["index.html", "src/js/vendor/jquery.min.js"]
     }],
+
+    "content_security_policy": "script-src 'self' https://*.jquery.com; object-src 'self'",
+    
     "web_accessible_resources": [
-        "index.html", "src/js/index.js", "profil.html", "takeMusic.html", "SendMusic.html", "content.js"
+        "index.html", "https://code.jquery.com/jquery-3.3.1.min.js", "src/js/index.js", "profil.html", "takeMusic.html", "SendMusic.html", "content.js"
     ],
     "browser_action": {
         "default_icon" : "images/psp.png"
     },
     "background": {
-        "default_icon" : "images/psp.png",
          "scripts": ["background.js"]
     }
 }

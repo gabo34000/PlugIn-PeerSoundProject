@@ -1,12 +1,13 @@
 var main = document.getElementById('main');
 main.classList.add('show');
+var browser = browser || chrome;
 
 var close = document.getElementById("cloclo");
 if (close)
   close.addEventListener("click", closer);
 
 function closer(){
-chrome.tabs.executeScript(null, {file: "closer.js"});
+browser.tabs.executeScript(null, {file: "closer.js"});
 }
 
 var add = document.getElementById('buttonAdd');
@@ -20,13 +21,13 @@ function getMusic()
 
 function getLink(fenetre, tab) {
     if (!fenetre) {
-         chrome.windows.getLastFocused(function(fenetre) { getLink(fenetre); });
+         browser.windows.getLastFocused(function(fenetre) { getLink(fenetre); });
      } else {
          if (!tab) {
-             chrome.tabs.getSelected(fenetre.id, function(tab) { getLink(fenetre, tab); });
+             browser.tabs.getSelected(fenetre.id, function(tab) { getLink(fenetre, tab); });
          } else {
              var url = tab.url;
-             if (url.indexOf("www.youtube.com/watch?v=") > 0){
+             if (url.indexOf("www.youtube.com/watch?v=") > 0 || url.indexOf("soundcloud.com/") > 0){
                 var urlStringified = JSON.stringify(url);
                 localStorage.setItem("musicToAdd", urlStringified);
                 main.classList.remove('show');

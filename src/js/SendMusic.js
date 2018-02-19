@@ -1,6 +1,8 @@
 var popError = document.getElementById("errorPop"),
     closeError = document.getElementById('close_a'),
     main = document.getElementById('main');
+
+    var browser = browser || chrome;
 setTimeout(function(){
     main.classList.add('show');
 }, 500);
@@ -36,7 +38,7 @@ var close = document.getElementById("cloclo");
 
 function closer(){
     sessionStorage.removeItem('infos');
-  chrome.tabs.executeScript(null, {file: "closer.js"});
+  browser.tabs.executeScript(null, {file: "closer.js"});
 }
 
 

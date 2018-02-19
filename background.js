@@ -1,5 +1,6 @@
-chrome.browserAction.onClicked.addListener(function(tab) {
+var browser = browser || chrome;
+browser.browserAction.onClicked.addListener(function(tab) {
 
-    chrome.tabs.executeScript(null, {file: "content.js"});
+    browser.tabs.executeScript(null, {file: "content.js"});
 
 });

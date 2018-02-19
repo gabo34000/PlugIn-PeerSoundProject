@@ -9,6 +9,7 @@ var artist = document.getElementById("boxArtist"),
     textarea3 = document.getElementById('textarea3'),
     main = document.getElementById('main');
 
+var browser = browser || chrome;
 setTimeout(function(){
     main.classList.add('show');
 }, 500);
@@ -23,7 +24,7 @@ var close = document.getElementById("cloclo");
 
 function closer(){
   sessionStorage.removeItem('infos');
-  chrome.tabs.executeScript(null, {file: "closer.js"});
+  browser.tabs.executeScript(null, {file: "closer.js"});
 }
 
 if (artist){
@@ -52,11 +53,10 @@ if(btnClose)
 
 var url = JSON.parse(localStorage.getItem("musicToAdd"));
 var boxUrl = document.getElementById("boxUrl");
-
-$.getJSON('https://noembed.com/embed', //avoir le titre de la musique
-{format: 'json', url: url}, function (data) {
-    boxUrl.value = data.title;
-});
+    $.getJSON('https://noembed.com/embed', //avoir le titre de la musique
+    {   format: 'json', url: url}, function (data) {
+        boxUrl.value = data.title;
+    });
    
 
 function sleep(miliseconds) {

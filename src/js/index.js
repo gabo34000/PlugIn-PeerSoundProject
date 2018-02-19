@@ -22,7 +22,8 @@ var close = document.getElementById("cloclo");
     close.addEventListener("click", closer);
 
 function closer(){
-  chrome.tabs.executeScript(null, {file: "closer.js"});
+  var browser = browser || chrome;  
+  browser.tabs.executeScript(null, {file: "closer.js"});
 }
 
 function changePage() {
@@ -39,26 +40,41 @@ function changePage() {
       email.className = '';
         pass.className = '';
         console.log(email.value + pass.value + ']'); 
-        jQuery.post('https://localhost:8000/api/auth/login',
-        {
-          login: email.value,
-          password: pass.value
-        },
-         function (data) {
-          console.log(email.value + pass.value + ']');  
-           if (data.error != - 1) {
-              console.log(data);
-              localStorage.setItem("email", email.value);
-              console.log(data.account.usr_id);
-              localStorage.setItem("id", data.account.usr_id);
-              console.log(data.account.usr_firstame);
-              localStorage.setItem("name", data.account.usr_firstame);
-              main.classList.remove('show');
-              setTimeout(function(){
-              document.location.href = "./profil.html";
-              }, 500);
-            }
-          });
+           var script = document.createElement('script');
+           script.type = "text/javascript";
+           script.src = "https://code.jquery.com/jquery-3.3.1.min.js";
+           document.getElementsByTagName('head')[0].appendChild(script);
+           setTimeout(function(){
+           console.log("YOLO");
+           if (window.jQuery) {  
+            // jQuery is loaded  
+            console.log("Yeah!");
+        } else {
+            // jQuery is not loaded
+            console.log("Doesn't Work");
+        }
+            jQuery.post('https://localhost:8000/api/auth/login',
+            {
+              login: email.value,
+              password: pass.value
+            },
+             function (data) {
+              console.log(email.value + pass.value + ']');  
+               if (data.error != - 1) {
+                  console.log(data);
+                  localStorage.setItem("email", email.value);
+                  console.log(data.account.usr_id);
+                  localStorage.setItem("id", data.account.usr_id);
+                  console.log(data.account.usr_firstame);
+                  localStorage.setItem("name", data.account.usr_firstame);
+                  main.classList.remove('show');
+                  setTimeout(function(){
+                  document.location.href = "./profil.html";
+                  }, 500);
+                }
+              });
+          }, 3000);
+           console.log("YOL2");
     } else if ( !(email.value) && (pass.value) ) {
     	email.className = 'error';
     	pass.className = '';
