@@ -1,8 +1,60 @@
 var main = document.getElementById('main');
 main.classList.add('show');
 var browser = browser || chrome;
-
+var musicName = document.getElementById('musicName');
+var prev = document.getElementById('previousbtn');
+var next = document.getElementById('nextbtn');
 var close = document.getElementById("cloclo");
+
+if (prev)
+    prev.addEventListener("click", goPrev);
+
+function goPrev()
+{   
+    console.log("maniite");
+    var num = localStorage.getItem("numMusic");
+    if (num > 1)
+        num--;
+    jQuery.get('https://localhost:8000/api/music/' + num,
+    function (data){
+        if (data){
+            console.log(data.Music);
+            if (data.Music != undefined){
+                if ((data.Music.music_name + " - " + data.Music.music_group).length > 20)
+                musicName.innerHTML = (data.Music.music_name + " - " + data.Music.music_group).slice(0, 16) + "...";
+                else
+                    musicName.innerHTML = data.Music.music_name + " - " + data.Music.music_group;
+                localStorage.setItem("numMusic", num);
+            }
+        }
+    }
+    );
+}
+
+
+if (next)
+    next.addEventListener("click", goNext);
+
+function goNext()
+{
+
+    var num = localStorage.getItem("numMusic");
+    num++;
+    jQuery.get('https://localhost:8000/api/music/' + num,
+    function (data){
+        if (data){
+            console.log(data.Music);
+            if (data.Music != undefined)
+            if ((data.Music.music_name + " - " + data.Music.music_group).length > 20)
+            musicName.innerHTML = (data.Music.music_name + " - " + data.Music.music_group).slice(0, 16) + "...";
+            else
+                musicName.innerHTML = data.Music.music_name + " - " + data.Music.music_group;
+            localStorage.setItem("numMusic", num); 
+        }
+    }
+    );
+}
+
 if (close)
   close.addEventListener("click", closer);
 
@@ -59,6 +111,15 @@ jQuery.get('https://localhost:8000/api/user/' + JSON.parse(localStorage.getItem(
 function (data){
     if (data){
         console.log(data);
+    }
+}
+);
+
+jQuery.get('https://localhost:8000/api/music/' + 1,
+function (data){
+    if (data){
+        console.log(data.Music);
+        musicName.innerHTML = data.Music.music_name + " - " + data.Music.music_group;
     }
 }
 );

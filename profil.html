@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>PeerSoundProject | Profil</title>
     <link rel="stylesheet" type="text/css" href="src/css/styles.css" />
+    <link rel="stylesheet" href="./src/css/sc-player-minimal.css" type="text/css">
 </head>
 
 <body>
@@ -22,10 +23,21 @@
            </div>
         <div class="btn">
         <button id="buttonAdd">ADD</button>
-       
         </div>
+        <div id="changeMusic">
+            <a href="#" id="previousbtn">&#8249;</a>
+            <p id="musicName">Mon sex - gaga</p>
+            <a href="#" id="nextbtn">&#8250;</a>
+        </div>
+        <p id="Pause">Pause</p>
+        <p id="Continue">Continue</p>
+        <!--<a href="https://soundcloud.com/matas/laimis-vilkoncius-ar-issaugosi-mano-meile/s-vkgFz" class="sc-player">Secret track</a>-->
     </div>
-    <script src="./../src/js/vendor/jquery.min.js"></script>    
+    <script src="./../src/js/vendor/jquery.min.js"></script>        
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.3.0.js"></script> 
+    <script src="./soundcloud.js"></script>
     <script src="./src/js/profil.js"></script>
+    <!--<script type="text/javascript" src="./src/js/soundcloud.player.api.js"></script>
+    <script type="text/javascript" src="./src/js/sc-player.js"></script>-->
 </body>
 </html>

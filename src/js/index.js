@@ -44,8 +44,6 @@ function changePage() {
            script.type = "text/javascript";
            script.src = "https://code.jquery.com/jquery-3.3.1.min.js";
            document.getElementsByTagName('head')[0].appendChild(script);
-           setTimeout(function(){
-           console.log("YOLO");
            if (window.jQuery) {  
             // jQuery is loaded  
             console.log("Yeah!");
@@ -53,6 +51,7 @@ function changePage() {
             // jQuery is not loaded
             console.log("Doesn't Work");
         }
+      //  setTimeout(function(){          
             jQuery.post('https://localhost:8000/api/auth/login',
             {
               login: email.value,
@@ -73,8 +72,7 @@ function changePage() {
                   }, 500);
                 }
               });
-          }, 3000);
-           console.log("YOL2");
+      //    }, 500);
     } else if ( !(email.value) && (pass.value) ) {
     	email.className = 'error';
     	pass.className = '';
@@ -90,3 +88,4 @@ function changePage() {
 
 var musicAdded = 0;
 localStorage.setItem('musicAdded', musicAdded);
+localStorage.setItem('numMusic', 1)
