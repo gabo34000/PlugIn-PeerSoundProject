@@ -2,16 +2,69 @@ var main = document.getElementById('main');
 main.classList.add('show');
 var browser = browser || chrome;
 var musicName = document.getElementById('musicName');
+var playlistName = document.getElementById('playlistName');
 var prev = document.getElementById('previousbtn');
+var prevP = document.getElementById('previousbtnP');
 var next = document.getElementById('nextbtn');
+var nextP = document.getElementById('nextbtnP');
 var close = document.getElementById("cloclo");
 
+var namePlaylist = [];
+var idPlaylist = [0];
+var cptPlaylist = 0;
+var nameMusic = [];
+var idMusic = [0];
+var cptMusic = 0;
+
+function getMusicFromPlaylist(){
+    jQuery.get('https://localhost:8000/api/musiclink',
+    function (data){
+        if (data){
+            console.log(data);
+            for (var i = 0; i < data.length; i++){
+                if (data[i].usr_id == JSON.parse(localStorage.getItem("id")) && data[i].playlist_id == idPlaylist[cptPlaylist]){
+                    idMusic[cptMusic] == data[i].music_id;
+                    cptMusic++;
+                }
+            }
+            cptMusic = 0;
+            jQuery.get('https://localhost:8000/api/music/' + idMusic[cptMusic],
+            function (data){
+                if (data){
+                    console.log(data.Music);
+                    if ((data.Music.music_name + " - " + data.Music.music_group).length > 20)
+                    musicName.innerHTML = (data.Music.music_name + " - " + data.Music.music_group).slice(0, 16) + "...";
+                    else
+                        musicName.innerHTML = data.Music.music_name + " - " + data.Music.music_group;
+                }
+            });
+        }
+    });
+}
+
+jQuery.get('https://localhost:8000/api/playlist/',
+function (data){
+    if (data){
+        console.log(data);
+        for (var i = 0; i < data.length; i++){
+            if (data[i].playlist_creator == JSON.parse(localStorage.getItem("id")))
+                {
+                    namePlaylist[cptPlaylist] = data[i].playlist_name;
+                    idPlaylist[cptPlaylist] = data[i].playlist_id;
+                    cptPlaylist++;
+                }
+        }
+        cptPlaylist = 0;
+        playlistName.innerHTML = namePlaylist[cptPlaylist];
+       // getMusicFromPlaylist();
+    }
+});
+
+/*
 if (prev)
     prev.addEventListener("click", goPrev);
-
 function goPrev()
-{   
-    console.log("maniite");
+{
     var num = localStorage.getItem("numMusic");
     if (num > 1)
         num--;
@@ -31,28 +84,34 @@ function goPrev()
     );
 }
 
-
-if (next)
-    next.addEventListener("click", goNext);
-
+*/
+if (nextP)
+    nextP.addEventListener("click", goNext);
 function goNext()
 {
-
-    var num = localStorage.getItem("numMusic");
-    num++;
-    jQuery.get('https://localhost:8000/api/music/' + num,
-    function (data){
-        if (data){
-            console.log(data.Music);
-            if (data.Music != undefined)
-            if ((data.Music.music_name + " - " + data.Music.music_group).length > 20)
-            musicName.innerHTML = (data.Music.music_name + " - " + data.Music.music_group).slice(0, 16) + "...";
-            else
-                musicName.innerHTML = data.Music.music_name + " - " + data.Music.music_group;
-            localStorage.setItem("numMusic", num); 
-        }
+    console.log("goNext" + cptPlaylist + namePlaylist.length);
+    if (namePlaylist.length -1> cptPlaylist){
+        cptPlaylist++;
+        playlistName.innerHTML = namePlaylist[cptPlaylist];        
     }
-    );
+    else{
+        cptPlaylist = 0;
+        playlistName.innerHTML = namePlaylist[cptPlaylist];
+    }   
+}
+
+if (prevP)
+prevP.addEventListener("click", goPrev);
+function goPrev()
+{
+if (cptPlaylist == 0){
+    cptPlaylist = namePlaylist.length -1;
+    playlistName.innerHTML = namePlaylist[cptPlaylist];        
+}
+    else {
+        cptPlaylist--;
+        playlistName.innerHTML = namePlaylist[cptPlaylist];
+    }
 }
 
 if (close)

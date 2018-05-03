@@ -1,6 +1,7 @@
 var artist = document.getElementById("boxArtist"),
     date = document.getElementById("boxDate"),
     description = document.getElementById("boxDescription"),
+    Playlists = document.getElementById("boxPlaylist"),
     popError = document.getElementById("errorPop"),
     closeError = document.getElementById('close_a'),
     btnClose = document.getElementById('close_b'),
@@ -10,6 +11,7 @@ var artist = document.getElementById("boxArtist"),
     main = document.getElementById('main');
 
 var browser = browser || chrome;
+var idMusic = 0;
 setTimeout(function(){
     main.classList.add('show');
 }, 500);
@@ -26,6 +28,24 @@ function closer(){
   sessionStorage.removeItem('infos');
   browser.tabs.executeScript(null, {file: "closer.js"});
 }
+
+jQuery.get('https://localhost:8000/api/playlist/',
+function (data){
+    if (data){
+        console.log(data);
+        for (var i = 0; i < data.length; i++){
+            if (data[i].playlist_creator == JSON.parse(localStorage.getItem("id")))
+                {
+                    var opt = document.createElement('option');
+                    opt.value = data[i].playlist_id;
+                    opt.innerHTML = data[i].playlist_name;
+                    Playlists.appendChild(opt);
+                    console.log(data[i].playlist_id + " - " + data[i].playlist_name);
+                }
+        }
+    }
+}
+);
 
 if (artist){
     if (artist.value){
@@ -91,12 +111,23 @@ function sendMusic() {
        function (data){
            if (data){
                console.log(data);
+                idMusic = data.Music.music_id;
+                jQuery.post('https://localhost:8000/api/musiclink/',{
+                    usr_id: JSON.parse(localStorage.getItem("id")),
+                    music_id: idMusic,
+                    playlist_id: Playlists.options[Playlists.selectedIndex].value
+                    },
+                    function (data){
+                        if (data){
+                           console.log(data);
+                    }
+                    });
+                    setTimeout(function(){
+                       // document.location.href = "profil.html"
+                    }, 500);
            }
        }
        );
-        setTimeout(function(){
-            document.location.href = "profil.html"
-        }, 500);
     }
     else {
         textarea1.className = 'blur';

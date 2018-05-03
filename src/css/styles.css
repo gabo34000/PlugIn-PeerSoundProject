@@ -682,38 +682,61 @@ a {
     padding: 8px 16px;
 }
 
-#changeMusic {
-    padding-top: 20px;
- /*   display: inline;
-    justify-content: space-between;*/
-   /* display: block;
-    display: inline-block;*/
-    margin-top: 20px;
-}
-a:hover {
-    background-color: #ddd;
-    color: black;
+
+#changePlaylist {
+    position: absolute;
+    top: 210;
+    float: left;
+    left: 5;
 }
 
-#previousbtn {
+#previousbtnP, #previousbtn{
     margin-right: 5px;
     background-color: #f1f1f1;
     color: black;
     border-radius: 50%;
     display: inline;
     justify-content: space-between;
-    
 }
 
-#musicName {
-    display: inline;
-    justify-content: space-between;
+#playlistName, #musicName{
+    position: absolute;
+    width: 100;
+    float: left;
+    top: 0;
+    margin-left: 100px;
 }
-#nextbtn {
+
+#nextbtnP, #nextbtn {
     margin-left: 5px;
     background-color: #f1f1f1;
     color: black;
     border-radius: 50%;
-    display: inline;
-    justify-content: space-between;
+    position: absolute;
+    float: left;
+    top: -8;
+    left: 275;
+}
+
+#changeMusic {
+    position: absolute;
+    top: 260;
+    float: left;
+    left: 5;
+}
+
+a:hover{
+    background-color: #ddd;
+    color: black;
+}
+#Pause {
+    position: absolute;
+    top: 420;
+    right: 20;
+}
+
+#Continue {
+    position: absolute;
+    top: 420;
+    right: 280;
 }

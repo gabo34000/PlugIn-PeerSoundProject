@@ -9,6 +9,22 @@
 *   <a href="http://soundcloud.com/matas/hobnotropic" class="sc-player">My new dub track</a>
 *   The link will be automatically replaced by the HTML based player
 */
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F' + 'neptuneprog' + '%2F' + 'monsters' + '&client_id=' + 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa',
+        function (data){
+            if (data){
+              console.log(data);
+              var linksTest = [{url :data.permalink_url, title: data.permalink}];
+             // console.log(test);
+
 (function($) {
   // Convert milliseconds into Hours (h), Minutes (m), and Seconds (s)
   var timecode = function(ms) {
@@ -52,6 +68,7 @@
       secureDocument = (document.location.protocol === 'https:'),
       // convert a SoundCloud resource URL to an API URL
       scApiUrl = function(url, apiKey) {
+        console.log("55 " + url);        
         var resolver = ( secureDocument || (/^https/i).test(url) ? 'https' : 'http') + '://api.' + domain + '/resolve?url=',
             params = 'format=json&consumer_key=' + apiKey +'&callback=?';
 
@@ -61,10 +78,12 @@
         }
 
         // check if it's already a resolved api url
+        //!!!!!
         if ( (/api\./).test(url) ) {
           return url + '?' + params;
         } else {
-          return resolver + url + '&' + params;
+          console.log(resolver + url + '&' + params);
+          return "";//resolver + url + '&' + params;
         }
       };
 
@@ -169,7 +188,7 @@
     var flashDriver = function() {
       var engineId = 'scPlayerEngine',
           player,
-          flashHtml = function(url) {
+            flashHtml = function(url) {
             var swf = (secureDocument ? 'https' : 'http') + '://player.' + domain +'/player.swf?url=' + url +'&amp;enable_api=true&amp;player_type=engine&amp;object_id=' + engineId;
             if ($.browser.msie) {
               return '<object height="100%" width="100%" id="' + engineId + '" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" data="' + swf + '">'+
@@ -187,6 +206,7 @@
       // listen to audio engine events
       // when the loaded track is ready to play
       soundcloud.addEventListener('onPlayerReady', function(flashId, data) {
+        console.log("onPlayerReady");
         player = soundcloud.getPlayer(engineId);
         callbacks.onReady();
       });
@@ -208,6 +228,7 @@
       return {
         load: function(track) {
           var url = track.uri;
+          console.log("211 " + url);
           if(player){
             player.api_load(url);
           }else{
@@ -238,7 +259,6 @@
             player.api_setVolume(val);
           }
         }
-
       };
     };
 
@@ -258,7 +278,11 @@
             playerObj = {node: $player, tracks: []},
             loadUrl = function(link) {
               var apiUrl = scApiUrl(link.url, apiKey);
-              $.getJSON(apiUrl, function(data) {
+              console.log(apiUrl);
+              jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F' + 'neptuneprog' + '%2F' + 'monsters' + '&client_id=' + 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa',
+        function (data){
+            if (data){
+//              $.getJSON(apiUrl, function(data) {
                 // log('data loaded', link.url, data);
                 index += 1;
                 if(data.tracks){
@@ -288,8 +312,9 @@
                 }else{
                   // if loading finishes, anounce it to the GUI
                   playerObj.node.trigger({type:'onTrackDataLoaded', playerObj: playerObj, url: apiUrl});
+                  
                 }
-             });
+              }});//});
            };
         // update current API key
         apiKey = key;
@@ -343,6 +368,7 @@
       },
       play = function(track) {
         var url = track.permalink_url;
+        console.log("347 " + url);        
         if(currentUrl === url){
           // log('will play');
           audioEngine.play();
@@ -485,13 +511,13 @@
         playerId = players.length,
         $source = node && $(node),
         sourceClasses = $source[0].className.replace('sc-player', ''),
-        links = opts.links || $.map($('a', $source).add($source.filter('a')), function(val) { return {url: val.href, title: val.innerHTML}; }),
+        links = linksTest,//opts.links || $.map($('a', $source).add($source.filter('a')), function(val) { return {url: val.href, title: val.innerHTML}; }),
         $player = $('<div class="sc-player loading"></div>').data('sc-player', {id: playerId}),
         $artworks = $('<ol class="sc-artwork-list"></ol>').appendTo($player),
         $info = $('<div class="sc-info"><h3></h3><h4></h4><p></p><a href="#" class="sc-info-close">X</a></div>').appendTo($player),
         $controls = $('<div class="sc-controls"></div>').appendTo($player),
         $list = $('<ol class="sc-trackslist"></ol>').appendTo($player);
-
+        console.log(links);
         // add the classes of the source node to the player itself
         // the players can be indvidually styled this way
         if(sourceClasses || opts.customClass){
@@ -524,7 +550,7 @@
           $.each(tracks, function(index, track) {
             var active = index === 0;
             // create an item in the playlist
-            $('<li><a href="' + track.permalink_url +'">' + track.title + '</a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
+            $('<li><a href="' + track.permalink_url +'">' /*+ track.title*/ + '</a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
             // create an item in the artwork list
             $('<li></li>')
               .append(artworkImage(track, index >= opts.loadArtworks))
@@ -561,7 +587,7 @@
             onPlay($player);
             didAutoPlay = true;
           }
-        });
+        });+
 
 
     // replace the DOM source (if there's one)
@@ -599,6 +625,7 @@
     // do something with the dom object before you render it, add nodes, get more data from the services etc.
     beforeRender  :   function(tracksData) {
       var $player = $(this);
+      console.log("player beforeRender" + $player);
     },
     // initialization, when dom is ready
     onDomReady  : function() {
@@ -633,7 +660,7 @@
       .find('a.sc-info-toggle').toggleClass('active');
     return false;
   });
-
+  
   // selecting tracks in the playlist
   $(document).on('click','.sc-trackslist li', function(event) {
     var $track = $(this),
@@ -667,8 +694,7 @@
       ev.preventDefault();
     }
   };
-
-
+  
   // seeking in the loaded track buffer
   $(document)
     .on('click','.sc-time-span', function(event) {
@@ -685,6 +711,7 @@
     });
 
   // changing volume in the player
+  /*
   var startVolumeTracking = function(node, startEvent) {
     var $node = $(node),
         originX = $node.offset().left,
@@ -715,7 +742,7 @@
     $('span.sc-volume-status').css({width: event.volume + '%'});
   });
   // -------------------------------------------------------------------
-
+*/
   // the default Auto-Initialization
   $(function() {
     if($.isFunction($.scPlayer.defaults.onDomReady)){
@@ -724,3 +751,5 @@
   });
 
 })(jQuery);
+}
+});
