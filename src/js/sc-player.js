@@ -9,6 +9,39 @@
 *   <a href="http://soundcloud.com/matas/hobnotropic" class="sc-player">My new dub track</a>
 *   The link will be automatically replaced by the HTML based player
 */
+var artist = "";
+var music = "";
+var nextM = document.getElementById('nextbtn');
+var nextP = document.getElementById('nextbtnP');
+
+if (nextM)
+nextM.addEventListener("click", tryTest);
+if (nextP)
+nextP.addEventListener("click", tryTest);
+
+function mescouilles(){
+  setTimeout(Onverra, 5000);
+}
+function tryTest()
+{
+  test = JSON.stringify(localStorage.getItem("MusiqueToPlay"));
+  console.log("test   ", test);
+  if (test == undefined){
+    setTimeout(tryTest, 500);
+  }
+  localStorage.removeItem("MusiqueToPlay");
+  arrayUrl = test.split("/");
+  artist = arrayUrl[3];
+  music = arrayUrl[4];
+  music =  music.substring(0, music.length - 1);  
+  //
+  //sleep(1000);
+  mescouilles ();
+}
+
+tryTest();
+
+
 function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
@@ -17,14 +50,14 @@ function sleep(milliseconds) {
     }
   }
 }
-
-jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F' + 'neptuneprog' + '%2F' + 'monsters' + '&client_id=' + 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa',
+function Onverra(){
+jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F" + artist + "%2F" + music + "&client_id=nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa",
         function (data){
             if (data){
-              console.log(data);
+              console.log("DATATATATATA", data);
               var linksTest = [{url :data.permalink_url, title: data.permalink}];
              // console.log(test);
-
+             
 (function($) {
   // Convert milliseconds into Hours (h), Minutes (m), and Seconds (s)
   var timecode = function(ms) {
@@ -279,7 +312,7 @@ jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
             loadUrl = function(link) {
               var apiUrl = scApiUrl(link.url, apiKey);
               console.log(apiUrl);
-              jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F' + 'neptuneprog' + '%2F' + 'monsters' + '&client_id=' + 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa',
+              jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F' + artist + '%2F' + music + '&client_id=' + 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa',
         function (data){
             if (data){
 //              $.getJSON(apiUrl, function(data) {
@@ -711,7 +744,7 @@ jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
     });
 
   // changing volume in the player
-  /*
+  
   var startVolumeTracking = function(node, startEvent) {
     var $node = $(node),
         originX = $node.offset().left,
@@ -742,7 +775,7 @@ jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
     $('span.sc-volume-status').css({width: event.volume + '%'});
   });
   // -------------------------------------------------------------------
-*/
+
   // the default Auto-Initialization
   $(function() {
     if($.isFunction($.scPlayer.defaults.onDomReady)){
@@ -753,3 +786,4 @@ jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
 })(jQuery);
 }
 });
+}

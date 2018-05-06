@@ -668,7 +668,10 @@ h1 {
     margin-left: 10px;    
 }
 .photoProfil {
-    border-radius: 50%;
+    position: absolute;
+   border-radius: 50%;
+    top: -20px;
+    left: -20px;
 }
 
 #name {
@@ -739,4 +742,8 @@ a:hover{
     position: absolute;
     top: 420;
     right: 280;
+}
+
+#profilInfo {
+    width: 1
 }

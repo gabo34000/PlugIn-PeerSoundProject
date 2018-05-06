@@ -98,10 +98,10 @@ function sendMusic() {
         sessionStorage.setItem("infos", JSON.stringify(infs));
        var musicAdded = 1;
        localStorage.setItem('musicAdded', musicAdded);
-       console.log(JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url);
+       console.log("agagagagaggagag", JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url);
        jQuery.post('https://localhost:8000/api/music/',{
             usr_id: JSON.parse(localStorage.getItem("id")),
-            music_source: "youtube",
+            music_source: "soundcloud",
             music_group: artist.value,
             music_name: boxUrl.value,
             music_description: description.value,
