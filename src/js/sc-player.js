@@ -19,9 +19,6 @@ nextM.addEventListener("click", tryTest);
 if (nextP)
 nextP.addEventListener("click", tryTest);
 
-function mescouilles(){
-  setTimeout(Onverra, 5000);
-}
 function tryTest()
 {
   test = JSON.stringify(localStorage.getItem("MusiqueToPlay"));
@@ -34,9 +31,11 @@ function tryTest()
   artist = arrayUrl[3];
   music = arrayUrl[4];
   music =  music.substring(0, music.length - 1);  
+  $(".post").remove();
+  $("body").append("<div class='post'><a href='' class='sc-player'>Secret track</a></div>");
   //
   //sleep(1000);
-  mescouilles ();
+  Onverra();
 }
 
 tryTest();

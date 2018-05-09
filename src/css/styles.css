@@ -744,6 +744,10 @@ a:hover{
     right: 280;
 }
 
-#profilInfo {
-    width: 1
+#theImg {
+    position: absolute;
+    top : 450px;
+    left : 0px;/*
+    width: 200px;
+  height: 200px;*/
 }
