@@ -1,5 +1,5 @@
-::-webkit-scrollbar { 
-  display: none; 
+::-webkit-scrollbar {
+  display: none;
 }
 
 .post {
@@ -10,7 +10,7 @@
 .sc-player{
   width: 330px;
   height: 60px;
-  position: relative;
+  /*position: relative;*/
   margin: 20px 0;
   left: -40px;
 }
@@ -25,7 +25,7 @@
 
 .sc-player .sc-artwork-list{
   display: none;
-  
+
 }
 
 .sc-player .sc-artwork-list li{
@@ -36,13 +36,13 @@
 .sc-player .sc-artwork-list li.active{
   list-style-type: none;
   display: block;
-  
+
 }
 
 .sc-player .sc-artwork-list li img, .sc-player .sc-artwork-list li div{
   list-style-type: none;
   width: 100%;
-  height: 100%;  
+  height: 100%;
 }
 
 /* controls */
@@ -53,29 +53,29 @@
   height: 40px;
   top: -70px;
   left: 180px;
-  
+
 }
 
 .sc-player .sc-controls a{
   display: block;
   width: 40px;
   height: 40px;
-  
+
 }
 
 .sc-player .sc-controls a.sc-play, .sc-player .sc-controls a.sc-pause{
   text-indent: -3000px;
-  
+
 }
 
 .sc-player .sc-controls a.sc-pause{
   display: none;
-  
+
 }
 
 .sc-player.playing .sc-controls a.sc-play{
   display: none;
-  
+
 }
 
 .sc-player.playing .sc-controls a.sc-pause{
@@ -86,12 +86,12 @@
 
 .sc-scrubber {
   position: absolute;
-  display: block; 
+  display: block;
   left: 45px;
   bottom: 10px;
   height: 40px;
   width: 95.5%;
-  
+
 }
 /*
 .sc-player:hover .sc-scrubber, .sc-player.playing .sc-scrubber {
@@ -105,7 +105,7 @@
   height: 30px;
   margin: 5px;
   position: relative;
-  
+
 }
 
 .sc-scrubber .sc-buffer, .sc-scrubber .sc-played{
@@ -114,7 +114,7 @@
   top: 0;
   width: 0;
   -webkit-transition: width 0.1s linear;
-  
+
 }
 
 .sc-scrubber .sc-time-indicators{
@@ -142,7 +142,7 @@
   cursor: pointer;
   margin: 5px;
   padding: 5px;
-  list-style: none; 
+  list-style: none;
 }
 
 /* Track info*/
@@ -155,7 +155,7 @@
   padding: 5px;
   height: 450px;
   z-index: 500;
-  margin-left: -40px; 
+  margin-left: -40px;
 }
 
 .sc-player .sc-info.active{

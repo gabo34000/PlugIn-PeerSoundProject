@@ -9,54 +9,6 @@
 *   <a href="http://soundcloud.com/matas/hobnotropic" class="sc-player">My new dub track</a>
 *   The link will be automatically replaced by the HTML based player
 */
-var artist = "";
-var music = "";
-var nextM = document.getElementById('nextbtn');
-var nextP = document.getElementById('nextbtnP');
-
-if (nextM)
-nextM.addEventListener("click", tryTest);
-if (nextP)
-nextP.addEventListener("click", tryTest);
-
-function tryTest()
-{
-  test = JSON.stringify(localStorage.getItem("MusiqueToPlay"));
-  console.log("test   ", test);
-  if (test == undefined){
-    setTimeout(tryTest, 500);
-  }
-  localStorage.removeItem("MusiqueToPlay");
-  arrayUrl = test.split("/");
-  artist = arrayUrl[3];
-  music = arrayUrl[4];
-  music =  music.substring(0, music.length - 1);  
-  $(".post").remove();
-  $("body").append("<div class='post'><a href='' class='sc-player'>Secret track</a></div>");
-  //
-  //sleep(1000);
-  Onverra();
-}
-
-tryTest();
-
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-function Onverra(){
-jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F" + artist + "%2F" + music + "&client_id=nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa",
-        function (data){
-            if (data){
-              console.log("DATATATATATA", data);
-              var linksTest = [{url :data.permalink_url, title: data.permalink}];
-             // console.log(test);
-             
 (function($) {
   // Convert milliseconds into Hours (h), Minutes (m), and Seconds (s)
   var timecode = function(ms) {
@@ -100,22 +52,21 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       secureDocument = (document.location.protocol === 'https:'),
       // convert a SoundCloud resource URL to an API URL
       scApiUrl = function(url, apiKey) {
-        console.log("55 " + url);        
         var resolver = ( secureDocument || (/^https/i).test(url) ? 'https' : 'http') + '://api.' + domain + '/resolve?url=',
             params = 'format=json&consumer_key=' + apiKey +'&callback=?';
 
         // force the secure url in the secure environment
+        console.log(url);
         if( secureDocument ) {
           url = url.replace(/^http:/, 'https:');
+          console.log(url);
         }
 
         // check if it's already a resolved api url
-        //!!!!!
         if ( (/api\./).test(url) ) {
           return url + '?' + params;
         } else {
-          console.log(resolver + url + '&' + params);
-          return "";//resolver + url + '&' + params;
+          return resolver + url + '&' + params;
         }
       };
 
@@ -199,7 +150,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
           }
         },
         seek: function(relative){
-          player.currentTime = player.duration * relative;//important
+          player.currentTime = player.duration * relative;
           player.play();
         },
         getDuration: function() {
@@ -220,7 +171,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
     var flashDriver = function() {
       var engineId = 'scPlayerEngine',
           player,
-            flashHtml = function(url) {
+          flashHtml = function(url) {
             var swf = (secureDocument ? 'https' : 'http') + '://player.' + domain +'/player.swf?url=' + url +'&amp;enable_api=true&amp;player_type=engine&amp;object_id=' + engineId;
             if ($.browser.msie) {
               return '<object height="100%" width="100%" id="' + engineId + '" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" data="' + swf + '">'+
@@ -238,7 +189,6 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       // listen to audio engine events
       // when the loaded track is ready to play
       soundcloud.addEventListener('onPlayerReady', function(flashId, data) {
-        console.log("onPlayerReady");
         player = soundcloud.getPlayer(engineId);
         callbacks.onReady();
       });
@@ -260,7 +210,6 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       return {
         load: function(track) {
           var url = track.uri;
-          console.log("211 " + url);
           if(player){
             player.api_load(url);
           }else{
@@ -291,6 +240,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
             player.api_setVolume(val);
           }
         }
+
       };
     };
 
@@ -310,11 +260,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
             playerObj = {node: $player, tracks: []},
             loadUrl = function(link) {
               var apiUrl = scApiUrl(link.url, apiKey);
-              console.log(apiUrl);
-              jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F' + artist + '%2F' + music + '&client_id=' + 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa',
-        function (data){
-            if (data){
-//              $.getJSON(apiUrl, function(data) {
+              $.getJSON(apiUrl, function(data) {
                 // log('data loaded', link.url, data);
                 index += 1;
                 if(data.tracks){
@@ -344,9 +290,8 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
                 }else{
                   // if loading finishes, anounce it to the GUI
                   playerObj.node.trigger({type:'onTrackDataLoaded', playerObj: playerObj, url: apiUrl});
-                  
                 }
-              }});//});
+             });
            };
         // update current API key
         apiKey = key;
@@ -400,7 +345,6 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       },
       play = function(track) {
         var url = track.permalink_url;
-        console.log("347 " + url);        
         if(currentUrl === url){
           // log('will play');
           audioEngine.play();
@@ -543,13 +487,13 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
         playerId = players.length,
         $source = node && $(node),
         sourceClasses = $source[0].className.replace('sc-player', ''),
-        links = linksTest,//opts.links || $.map($('a', $source).add($source.filter('a')), function(val) { return {url: val.href, title: val.innerHTML}; }),
+        links = opts.links || $.map($('a', $source).add($source.filter('a')), function(val) { return {url: val.href, title: val.innerHTML}; }),
         $player = $('<div class="sc-player loading"></div>').data('sc-player', {id: playerId}),
         $artworks = $('<ol class="sc-artwork-list"></ol>').appendTo($player),
         $info = $('<div class="sc-info"><h3></h3><h4></h4><p></p><a href="#" class="sc-info-close">X</a></div>').appendTo($player),
         $controls = $('<div class="sc-controls"></div>').appendTo($player),
         $list = $('<ol class="sc-trackslist"></ol>').appendTo($player);
-        console.log(links);
+
         // add the classes of the source node to the player itself
         // the players can be indvidually styled this way
         if(sourceClasses || opts.customClass){
@@ -582,7 +526,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
           $.each(tracks, function(index, track) {
             var active = index === 0;
             // create an item in the playlist
-            $('<li><a href="' + track.permalink_url +'">' /*+ track.title*/ + '</a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
+            $('<li><a href="' + track.permalink_url +'">' + track.title + '</a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
             // create an item in the artwork list
             $('<li></li>')
               .append(artworkImage(track, index >= opts.loadArtworks))
@@ -619,7 +563,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
             onPlay($player);
             didAutoPlay = true;
           }
-        });+
+        });
 
 
     // replace the DOM source (if there's one)
@@ -657,7 +601,6 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
     // do something with the dom object before you render it, add nodes, get more data from the services etc.
     beforeRender  :   function(tracksData) {
       var $player = $(this);
-      console.log("player beforeRender" + $player);
     },
     // initialization, when dom is ready
     onDomReady  : function() {
@@ -692,7 +635,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       .find('a.sc-info-toggle').toggleClass('active');
     return false;
   });
-  
+
   // selecting tracks in the playlist
   $(document).on('click','.sc-trackslist li', function(event) {
     var $track = $(this),
@@ -726,7 +669,8 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       ev.preventDefault();
     }
   };
-  
+
+
   // seeking in the loaded track buffer
   $(document)
     .on('click','.sc-time-span', function(event) {
@@ -743,7 +687,6 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
     });
 
   // changing volume in the player
-  
   var startVolumeTracking = function(node, startEvent) {
     var $node = $(node),
         originX = $node.offset().left,
@@ -783,6 +726,3 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
   });
 
 })(jQuery);
-}
-});
-}

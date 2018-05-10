@@ -32,20 +32,39 @@ function getMusicFromPlaylist(){
                 }
             }
             cptMusic = 0;
-                    if ((MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group).length > 20){
-                         musicName.innerHTML = (MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group).slice(0, 16) + "...";
-                    }
-                    else{
-                        musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group;
-                    }
-                    $(".post").remove();
+            if ((MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group).length > 20){
+                 musicName.innerHTML = (MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group).slice(0, 16) + "...";
+            }
+            else{
+                musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group;
+            }
+            console.log(MusicFromPlaylist[cptMusic].music_url);
+            $(".sc-player").empty()
+            for (cptMusic = 0; cptMusic < MusicFromPlaylist.length; cptMusic++) {
+              $(".sc-player").append("<a href='" + MusicFromPlaylist[cptMusic].music_url + "'></a>")
+            }
+            $("div.sc-player").scPlayer(/*{links: [{url: "https://soundcloud.com/uiceheidd/lucid-dreams-forget-me"}]}*/)
+            /*  links: [{url: }, {url: MusicFromPlaylist[cptMusic + 1].music_url}]
+            });*/
+            //$(".post").append("<a href=\"" + "")
+                    /*$(".sc-player").remove()
                     var test = ".sc-player-engine-container" + artist;
                     $(test).remove();
                     var arrayUrl = MusicFromPlaylist[cptMusic].music_url.split("/");
-                     artist = arrayUrl[3];
-                     music = arrayUrl[4];
-                    $("#main").append("<div class='post'><a href='' class='sc-player'></a></div>");
-                    launchMediaPlayer(artist, music);  
+                    console.log(arrayUrl);
+                    artist = arrayUrl[3];
+                    music = arrayUrl[4];
+                    console.log("artist : " + artist + " / music : " + music);
+                    console.log(MusicFromPlaylist[cptMusic].music_url);
+                    $("#main").append("<div class='post sc-player'></div>");
+                    for (cptMusic = 0; cptMusic < MusicFromPlaylist.length; cptMusic++)
+                    {
+                      $(".sc-player").append("<a href='" + MusicFromPlaylist.music_url + "'></a>")
+                    }
+                    launchMediaPlayer(artist, music);
+/*                      var elements = document.getElementsByClassName('post');
+                      console.log(elements);*/
+                    //elements[0].parentNode.removeChild();*/
         }
     });
 }
@@ -75,7 +94,7 @@ function goNextP()
 //    console.log("goNext" + cptPlaylist + namePlaylist.length);
     if (namePlaylist.length -1 > cptPlaylist){
         cptPlaylist++;
-        playlistName.innerHTML = namePlaylist[cptPlaylist];        
+        playlistName.innerHTML = namePlaylist[cptPlaylist];
     }
     else{
         cptPlaylist = 0;
@@ -83,7 +102,7 @@ function goNextP()
     }
     cptMusic = 0;
     MusicFromPlaylist = [{}];
-//    $(".post").remove();    
+//    $(".post").remove();
     getMusicFromPlaylist();
 }
 
@@ -94,7 +113,7 @@ function goPrevP()
 {
 if (cptPlaylist == 0){
     cptPlaylist = namePlaylist.length -1;
-    playlistName.innerHTML = namePlaylist[cptPlaylist];        
+    playlistName.innerHTML = namePlaylist[cptPlaylist];
 }
     else {
         cptPlaylist--;
@@ -102,7 +121,7 @@ if (cptPlaylist == 0){
     }
     cptMusic = 0;
     MusicFromPlaylist = [{}];
-//    $(".post").remove();    
+//    $(".post").remove();
     getMusicFromPlaylist();
 }
 /*
@@ -110,7 +129,7 @@ if (nextM)
     nextM.addEventListener("click", goNextM);
 function goNextM()
 {
-console.log("YOYYYOYOYOYOYYYOYOYOYOYOYOYOYOYOYOOYYO");    
+console.log("YOYYYOYOYOYOYYYOYOYOYOYOYOYOYOYOYOOYYO");
     if (MusicFromPlaylist.length -1 > cptMusic){
         cptMusic++;
         if ((MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group).length > 20){
@@ -118,7 +137,7 @@ console.log("YOYYYOYOYOYOYYYOYOYOYOYOYOYOYOYOYOOYYO");
        }
        else{
            musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group;
-       }//        musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name;        
+       }//        musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name;
     }
     else{
         cptMusic = 0;
@@ -132,7 +151,7 @@ console.log("YOYYYOYOYOYOYYYOYOYOYOYOYOYOYOYOYOOYYO");
     var arrayUrl = MusicFromPlaylist[cptMusic].music_url.split("/");
     var artist = arrayUrl[3];
     var music = arrayUrl[4];
-    music =  music.substring(0, music.length - 1);  
+    music =  music.substring(0, music.length - 1);
     $(".post").remove();
     $("body").append("<div class='post'><a href='' class='sc-player'></a></div>");
     launchMediaPlayer(artist, music);
@@ -147,12 +166,12 @@ function goPrevM()
     if (cptMusic == 0){
         cptMusic = MusicFromPlaylist.length -1;
         console.log(MusicFromPlaylist[cptMusic]);
-        musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name;        
+        musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name;
     }
     else{
         cptMusic--;
         musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name;
-    }   
+    }
     var arrayUrl = MusicFromPlaylist[cptMusic].music_url.split("/");
     var artist = arrayUrl[3];
     var music = arrayUrl[4];
@@ -212,7 +231,7 @@ if (musicAdded == 1){
      });
      popup.classList.toggle("hidden");
      musicAdded = 0;
-     localStorage.setItem('musicAdded', musicAdded);     
+     localStorage.setItem('musicAdded', musicAdded);
 }
 
 jQuery.get('https://localhost:8000/api/user/' + JSON.parse(localStorage.getItem("id")),
@@ -259,12 +278,13 @@ function sleep(milliseconds) {
     }
   }
 }*/
-function launchMediaPlayer(artist, music){
+/*function launchMediaPlayer(artist, music){
 jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F" + artist + "%2F" + music + "&client_id=nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa",
         function (data){
             if (data){
+              console.log("YEAAAAAH");
               var linksTest = [{url :data.permalink_url, title: data.permalink}];
-             
+
 (function($) {
   // Convert milliseconds into Hours (h), Minutes (m), and Seconds (s)
   var timecode = function(ms) {
@@ -308,7 +328,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       secureDocument = (document.location.protocol === 'https:'),
       // convert a SoundCloud resource URL to an API URL
       scApiUrl = function(url, apiKey) {
-       // console.log("55 " + url);        
+       // console.log("55 " + url);
         var resolver = ( secureDocument || (/^https/i).test(url) ? 'https' : 'http') + '://api.' + domain + '/resolve?url=',
             params = 'format=json&consumer_key=' + apiKey +'&callback=?';
 
@@ -518,16 +538,18 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
             playerObj = {node: $player, tracks: []},
             loadUrl = function(link) {
               var apiUrl = scApiUrl(link.url, apiKey);
-              //console.log(apiUrl);
+              console.log(artist);
               jQuery.get('https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud.com%2F' + artist + '%2F' + music + '&client_id=' + 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa',
         function (data){
             if (data){
+                console.log(data);
 //              $.getJSON(apiUrl, function(data) {
                 // log('data loaded', link.url, data);
                 index += 1;
                 if(data.tracks){
                   // log('data.tracks', data.tracks);
                   playerObj.tracks = playerObj.tracks.concat(data.tracks);
+                  console.log(playerObj.tracks);
                 }else if(data.duration){
                   // a secret link fix, till the SC API returns permalink with secret on secret response
                   data.permalink_url = link.url;
@@ -552,7 +574,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
                 }else{
                   // if loading finishes, anounce it to the GUI
                   playerObj.node.trigger({type:'onTrackDataLoaded', playerObj: playerObj, url: apiUrl});
-                  
+
                 }
               }});//});
            };
@@ -608,7 +630,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       },
       play = function(track) {
         var url = track.permalink_url;
-        console.log("611 url " + url);        
+        console.log("611 url " + url);
         if(currentUrl === url){
           // log('will play');
           audioEngine.play();
@@ -791,7 +813,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
           $.each(tracks, function(index, track) {
             var active = index === 0;
             // create an item in the playlist
-            $('<li><a href="' + track.permalink_url +'">' /*+ track.title*/ + '</a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
+            $('<li><a href="' + track.permalink_url +'">' /*+ track.title + '</a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
             // create an item in the artwork list
             $('<li></li>')
               .append(artworkImage(track, index >= opts.loadArtworks))
@@ -901,7 +923,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       .find('a.sc-info-toggle').toggleClass('active');
     return false;
   });
-  
+
   // selecting tracks in the playlist
   $(document).on('click','.sc-trackslist li', function(event) {
     var $track = $(this),
@@ -935,7 +957,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
       ev.preventDefault();
     }
   };
-  
+
   // seeking in the loaded track buffer
   $(document)
     .on('click','.sc-time-span', function(event) {
@@ -952,7 +974,7 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
     });
 
   // changing volume in the player
-  
+
   var startVolumeTracking = function(node, startEvent) {
     var $node = $(node),
         originX = $node.offset().left,
@@ -994,4 +1016,4 @@ jQuery.get("https://api.soundcloud.com/resolve.json?url=https%3A%2F%2Fsoundcloud
 })(jQuery);
 }
 });
-}
+}*/

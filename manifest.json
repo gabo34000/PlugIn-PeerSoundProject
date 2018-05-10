@@ -8,7 +8,7 @@
         "48": "images/psp.png",
         "128": "images/psp.png"
     },
-    
+
     "permissions": ["unlimitedStorage", "tabs", "<all_urls>", "activeTab", "cookies", "webRequest", "webNavigation", "*://developer.mozilla.org/*", "browsingData", "privacy"],
     "content_scripts": [{
         "matches": ["http://*/*", "https://*/*", "*://*/*", "*://*.mozilla.org/*"],
@@ -17,8 +17,8 @@
         "js" : ["index.html", "src/js/vendor/jquery.min.js"]
     }],
 
-    "content_security_policy": "script-src 'self' https://api.soundcloud.com/*; object-src 'self'",
-    
+    "content_security_policy": "script-src 'self' https://api.soundcloud.com ; object-src 'self'",
+
     "web_accessible_resources": [
         "index.html", "https://code.jquery.com/jquery-3.3.1.min.js", "https://connect.soundcloud.com/sdk/sdk-3.3.0.js", "src/js/index.js", "profil.html", "takeMusic.html", "SendMusic.html", "content.js"
     ],
