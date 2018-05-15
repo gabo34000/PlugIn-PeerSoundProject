@@ -124,12 +124,22 @@ if (cptPlaylist == 0){
 //    $(".post").remove();
     getMusicFromPlaylist();
 }
-/*
+
 if (nextM)
     nextM.addEventListener("click", goNextM);
 function goNextM()
 {
-console.log("YOYYYOYOYOYOYYYOYOYOYOYOYOYOYOYOYOOYYO");
+  console.log($('li.active'))
+  $('.sc-player').removeClass('playing')
+  $nextItem = $('.sc-trackslist li.active').next('li')
+  if(!$nextItem.length){
+    $nextItem = $('.sc-trackslist li.active').prev('li')
+  }
+  console.log($nextItem)
+  $nextItem.addClass('active').siblings('li').removeClass('active');
+  //$('.sc-player').addClass('playing')
+}
+/*console.log("YOYYYOYOYOYOYYYOYOYOYOYOYOYOYOYOYOOYYO");
     if (MusicFromPlaylist.length -1 > cptMusic){
         cptMusic++;
         if ((MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group).length > 20){
