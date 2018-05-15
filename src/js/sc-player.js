@@ -194,6 +194,7 @@
       });
 
       // when the loaded track finished playing
+      
       soundcloud.addEventListener('onMediaEnd', callbacks.onEnd);
 
       // when the loaded track is still buffering
@@ -526,7 +527,7 @@
           $.each(tracks, function(index, track) {
             var active = index === 0;
             // create an item in the playlist
-            $('<li><a href="' + track.permalink_url +'">' + track.title + '</a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
+            $('<li><a href="' + track.permalink_url +'"></a><span class="sc-track-duration">' + timecode(track.duration) + '</span></li>').data('sc-track', {id:index}).toggleClass('active', active).appendTo($list);
             // create an item in the artwork list
             $('<li></li>')
               .append(artworkImage(track, index >= opts.loadArtworks))
@@ -626,6 +627,28 @@
     $list.find('li.active').click();
     return false;
   });
+  //next music
+  $(document).on('click', '#nextbtn', function(event){
+    var $track = $('.sc-trackslist li.active'),
+    $player = $track.closest('.sc-player'),
+    trackId = $track.data('sc-track').id,
+    play = $player.is(':not(.playing)') || $track.is(':not(.active)');
+    //console.log("lollooooo ", $player);
+    onPlay($player, trackId);
+    return false;
+  });
+
+   //prev music
+   $(document).on('click', '#previousbtn', function(event){
+    var $track = $('.sc-trackslist li.active'),
+    $player = $track.closest('.sc-player'),
+    trackId = $track.data('sc-track').id,
+    play = $player.is(':not(.playing)') || $track.is(':not(.active)');
+    //console.log("lollooooo ", $player);
+    onPlay($player, trackId);
+    return false;
+  });
+
 
   // displaying the info panel in the player
   $(document).on('click','a.sc-info-toggle, a.sc-info-close', function(event) {
@@ -650,6 +673,7 @@
     $track.addClass('active').siblings('li').removeClass('active');
     $('.artworks li', $player).each(function(index) {
       $(this).toggleClass('active', index === trackId);
+      console.log(index);
     });
     return false;
   });

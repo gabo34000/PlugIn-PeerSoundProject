@@ -10,7 +10,6 @@ if (!iframe){
         extensionOrigin = 'moz-extension://' + browser.runtime.id;
 
     }
-    console.log("mite "  +  extensionOrigin);
     //if (!location.ancestorOrigins.contains(extensionOrigin)) {
     var iframe = document.createElement('iframe');
     iframe.src = browser.runtime.getURL('index.html');
